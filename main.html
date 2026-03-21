@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Baby Help</title>
+<meta name="description" content="Baby Help — suporte às famílias com cuidados infantis.">
+
+<!-- AOS CSS -->
+<link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
+<style>
+/* Reset / Base */
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:auto;min-height:100%}
+body{
+  font-family:"Poppins", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  color:#073241;
+  line-height:1.45;
+  background: linear-gradient(180deg, #e6f9ff 0%, #ffffff 100%);
+}
+
+/* Layout container */
+#page-wrap{min-height:100vh}
+.container{max-width:1100px;margin:0 auto;padding:28px 20px}
+
+/* Header */
+header{
+  width:100vw;display:flex;align-items:center;justify-content:center;
+  position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.95);
+  border-radius:0 0 12px 12px;box-shadow:0 8px 30px rgba(7,50,65,0.06)
+}
+header .container{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:12px 18px}
+.brand{display:flex;gap:12px;align-items:center;cursor:pointer}
+.logo{
+  width:56px;height:56px;border-radius:12px;
+  background:linear-gradient(135deg,#6dd3eb,#dceff6);
+  display:flex;align-items:center;justify-content:center;
+  color:#064a5a;font-weight:800;font-size:14px;
+  box-shadow:0 6px 18px rgba(11,64,82,0.06);
+  overflow:hidden;
+}
+.logo img{width:100%;height:100%;object-fit:cover;display:block;border-radius:12px}
+header h1{font-size:1.15rem;color:#064a5a;margin:0}
+.header-slogan{font-size:0.80rem;color:#376a74;margin-top:2px}
+nav a{color:#064a5a;text-decoration:none;margin-left:12px;font-weight:600}
+nav a:hover{color:#1e90ff}
+
+/* HERO */
+.hero{
+  display:grid;
+  grid-template-columns:1fr 420px;
+  gap:22px;
+  align-items:center;
+  margin:26px 0;
+}
+.hero-card{
+  background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(255,255,255,0.95));
+  border-radius:18px;padding:28px;box-shadow:0 20px 60px rgba(9,44,54,0.06);
+  position:relative; /* permite posicionamento absoluto da imagem */
+  overflow:hidden;   /* garante que a imagem não "vaze" */
+  z-index:3;
+}
+.hero-card h2{color:#0b6272;font-size:2rem;margin-bottom:14px;letter-spacing:0.2px}
+.lead{color:#234f57;font-size:1.05rem;margin-bottom:18px}
+.cta-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:8px}
+.btn{padding:12px 18px;border-radius:12px;font-weight:800;border:0;cursor:pointer;box-shadow:0 8px 20px rgba(11,64,82,0.05)}
+.btn.primary{background:#36a9c9;color:#fff}
+.btn.ghost{background:transparent;border:2px solid rgba(11,64,82,0.06);color:#064a5a}
+
+/* IMAGEM DECORATIVA dentro do box HERO (agora menor) */
+.hero-card .hero-deco{
+  position:absolute;
+  right:12px;
+  bottom:12px;
+  width:100px;           /* reduzido para não sobrepor texto */
+  max-width:25%;
+  height:auto;
+  pointer-events:none;
+  opacity:0.95;
+  z-index:2;
+  border-radius:12px;
+  filter: drop-shadow(0 8px 20px rgba(11,64,82,0.05));
+}
+
+/* HERO Visual (imagem à direita) */
+.hero-visual{display:flex;flex-direction:column;gap:12px;align-items:flex-end}
+.hero-visual img{width:100%;max-width:420px;border-radius:18px;box-shadow:0 18px 40px rgba(11,64,82,0.06);object-fit:cover;height:auto}
+
+/* SERVIÇOS */
+.servicos{display:flex;flex-wrap:wrap;gap:18px;margin:18px 0}
+.servicos .card{flex:1;min-width:300px;background:#fff;padding:18px;border-radius:12px;box-shadow:0 10px 30px rgba(11,64,82,0.05);display:flex;flex-direction:column}
+.servicos .card h3{color:#0b6272;margin-bottom:10px}
+.service-list{list-style:none;padding-left:0;flex:1}
+.service-list li{padding:10px;background:linear-gradient(90deg,#f0fbff,#eef9fb);border-radius:10px;margin-bottom:10px;font-weight:600;color:#13464f}
+
+/* SOBRE */
+.about{display:flex;flex-wrap:wrap;gap:18px;margin:18px 0}
+.about .text, .about .info{flex:1;min-width:300px;border-radius:12px;padding:18px;background:#fff;display:flex;flex-direction:column;box-shadow:0 10px 30px rgba(11,64,82,0.04);position:relative}
+.about .info{background:linear-gradient(180deg,#fff,#f0fbff);overflow:hidden}
+
+/* CONTATO */
+.contact{display:flex;flex-wrap:wrap;gap:18px;margin:22px 0}
+.contact .left, .contact .right{border-radius:12px;padding:12px 18px;background:#fff;flex:1;min-width:250px;display:flex;flex-direction:column;justify-content:center;box-shadow:0 8px 24px rgba(11,64,82,0.04)}
+.contact .left h3, .contact .left p, .contact .left a{margin:4px 0;color:#234f57}
+.contact .left a{font-weight:700;text-decoration:none}
+.contact .left a:hover{color:#1e90ff}
+
+/* Ajuste: imagem preenche o box direito sem aumentar o box */
+.contact .right.row{
+  display:flex;
+  align-items:stretch;
+  justify-content:flex-end;
+  gap:14px;
+  position:relative;
+  overflow:hidden;
+  min-height:90px;
+  padding:0;
+}
+.contact-img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  border-radius:0 12px 12px 0;
+  box-shadow:-10px 0 30px rgba(11,64,82,0.04);
+  pointer-events:none;
+  display:block;
+  align-self:stretch;
+}
+
+/* Responsivo */
+@media (max-width:760px){
+  .hero{grid-template-columns:1fr;gap:18px}
+  .hero-visual{order:2}
+  .hero-card{order:1}
+  .hero-card .hero-deco{width:100px;right:8px;bottom:8px}
+  .contact .right.row{flex-direction:column;align-items:flex-start;padding:12px}
+  .contact-img{position:relative;width:100%;height:160px;border-radius:10px;right:auto;top:auto;bottom:auto;box-shadow:0 8px 20px rgba(11,64,82,0.06)}
+}
+
+/* Slogan */
+.slogan{text-align:center;margin-top:8px;color:#124e57;font-weight:700;font-size:0.95rem}
+
+/* Footer */
+footer{text-align:center;padding:18px;color:#244b52;font-size:0.95rem;margin:22px 0}
+</style>
+</head>
+<body>
+<div id="page-wrap">
+
+  <!-- HEADER -->
+  <header role="banner">
+    <div class="container">
+      <div class="brand" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+        <div class="logo">
+          <img src="https://i.pinimg.com/1200x/fa/d7/d9/fad7d99adc0493a0ed35a8b5cf5bd7e8.jpg" alt="Baby Help Logo">
+        </div>
+        <div>
+          <h1>Baby Help</h1>
+          <div class="header-slogan">Cuidadores infantis · Suporte às famílias</div>
+          <div class="slogan" style="font-size:0.82rem;margin-top:6px">Desde 2017 cuidando do seu bem mais precioso</div>
+        </div>
+      </div>
+
+      <nav role="navigation">
+        <a href="#inicio">Início</a>
+        <a href="#servicos">Serviços</a>
+        <a href="#sobre">Sobre</a>
+        <a href="#contato">Contato</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="container">
+
+    <!-- HERO -->
+    <section class="hero" id="inicio" data-aos="fade-up">
+
+      <!-- BOX da esquerda (conteúdo) -->
+      <div class="hero-card" data-aos="fade-right">
+        <h2>Conhece a Baby Help?</h2>
+        <p class="lead">Nosso objetivo é fornecer suporte especializado e confiável às famílias, assegurando que cada criança receba cuidados de alta qualidade enquanto seus responsáveis estão no trabalho ou cumprindo outras atividades. Priorizamos segurança, atenção personalizada e bem-estar infantil, conectando profissionais treinadas e experientes a lares que buscam tranquilidade e confiança no cuidado de seus filhos. Com processos rigorosos de seleção e acompanhamento, garantimos um serviço ético, responsável e consistente, permitindo que as famílias possam se dedicar às suas rotinas diárias com a certeza de que seus filhos estão em boas mãos.</p>
+
+        <div class="cta-row" data-aos="fade-up" data-aos-delay="200">
+          <button class="btn ghost" onclick="document.getElementById('servicos').scrollIntoView({behavior:'smooth'})">Ver serviços</button>
+          <button class="btn primary" onclick="document.getElementById('contato').scrollIntoView({behavior:'smooth'})">Faça seu agendamento!</button>
+        </div>
+
+        <!-- IMAGEM DECORATIVA DENTRO DO BOX -->
+        <img class="hero-deco" src="https://i.pinimg.com/1200x/85/d3/a0/85d3a06797b27397b7a5236dce532fc0.jpg" alt="Ilustração decorativa baby" />
+      </div>
+
+      <!-- BOX da direita (imagem principal) -->
+      <aside class="hero-visual" data-aos="fade-left" data-aos-delay="400">
+        <img src="https://i.pinimg.com/736x/3b/a6/89/3ba689f189d9088dadb172a9e15c27c2.jpg" alt="Crianças brincando com brinquedos" />
+      </aside>
+
+    </section>
+
+    <!-- SERVIÇOS -->
+    <section class="servicos" id="servicos">
+      <div class="card" data-aos="fade-up" data-aos-delay="100">
+        <h3>Nossos serviços</h3>
+        <ul class="service-list">
+          <li>👶 Baby sitting</li>
+          <li>👩‍🏫 Monitora</li>
+          <li>🎉 Acompanhamento em eventos</li>
+          <li>✈️ Acompanhamento em viagens</li>
+        </ul>
+      </div>
+
+      <div class="card" data-aos="fade-up" data-aos-delay="200">
+        <h3>Como funciona</h3>
+        <p style="color:#234f57;margin-bottom:8px"><strong>Passo a passo simples:</strong></p>
+        <ol style="padding-left:18px;color:#234f57;line-height:1.6">
+          <li>A família faz o pedido</li>
+          <li>Nós selecionamos a profissional ideal</li>
+          <li>Você confirma e relaxa!</li>
+        </ol>
+        <p style="color:#234f57;margin-top:10px"><strong>Observações:</strong></p>
+        <ul style="color:#234f57;list-style:disc;padding-left:18px">
+          <li>O atendimento pode ser realizado 24h, desde que com agendamento prévio.</li>
+          <li>Todas as babás são entrevistadas, checadas e treinadas.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- SOBRE -->
+    <section class="about" id="sobre">
+      <div class="text card" data-aos="fade-right" data-aos-delay="100">
+        <h4 style="margin-top:0;color:#0b6272">Quem Somos</h4>
+        <p style="color:#234f57">A <strong>Baby Help</strong> nasceu com o propósito de oferecer tranquilidade, confiança e segurança às famílias que buscam um cuidado qualificado e humano para seus filhos. Desde 2017, conectamos <strong>babás preparadas, experientes e apaixonadas pelo que fazem</strong> a lares que valorizam o amor, o respeito e o desenvolvimento infantil. Acreditamos que o cuidado com a criança vai além da supervisão — é uma troca de afeto, aprendizado e confiança. Por isso, cada profissional passa por entrevistas, checagens e treinamentos rigorosos, garantindo um serviço ético, responsável e repleto de empatia.</p>
+      </div>
+
+      <div class="info" data-aos="fade-left" data-aos-delay="200">
+        <h4 style="margin-top:0;color:#0b6272">Missão</h4>
+        <p style="color:#234f57">Oferecer às famílias tranquilidade e segurança por meio de um serviço de babás qualificado, humanizado e de confiança. Nossa missão é conectar cuidadores preparados e apaixonados pelo que fazem a lares que valorizam o amor, o respeito e o desenvolvimento infantil, reconhecendo o papel essencial da babá na formação social e emocional das crianças.</p>
+
+        <h4 style="margin-top:12px;color:#0b6272">Visão</h4>
+        <p style="color:#234f57">Ser referência em excelência e profissionalismo no cuidado infantil, transformando a percepção sobre o trabalho de babá na cidade. Queremos construir uma rede sólida onde cada babá se sinta valorizada e cada família tenha certeza de estar recebendo um cuidado genuíno, responsável e cheio de afeto.</p>
+      </div>
+    </section>
+
+    <!-- CONTATO -->
+    <section id="contato" class="contact">
+      <div class="left" data-aos="fade-right">
+        <h3>Entre em contato</h3>
+        <p>Agende um horário ou tire suas dúvidas.</p>
+        <a href="tel:+5564992543155">📞 (64) 99254-3155</a><br>
+        <a href="https://www.instagram.com/babyhelprv" target="_blank">📸 @babyhelprv</a>
+      </div>
+
+      <div class="right row" data-aos="fade-left">
+        <!-- Imagem atualizada para preencher o box sem aumentar o seu tamanho -->
+        <img class="contact-img" src="https://i.pinimg.com/1200x/fc/0d/03/fc0d03859561f35e568596de4ac88959.jpg" alt="Ilustração crianças">
+      </div>
+    </section>
+
+    <footer>
+      © <span id="year"></span> Baby Help — Todos os direitos reservados.
+    </footer>
+
+  </div>
+</div>
+
+<!-- AOS JS -->
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+<script>
+AOS.init({duration:900,easing:'ease-out-cubic',once:true,offset:120});
+document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+<script>
+// PATCH: Inserir imagem no topo direito do card "Como funciona"
+(function(){
+  // Seleciona o card "Como funciona" pelo título
+  const cards = document.querySelectorAll('.servicos .card');
+  let targetCard = null;
+  cards.forEach(card => {
+    const h3 = card.querySelector('h3');
+    if(h3 && h3.textContent.trim() === 'Como funciona'){
+      targetCard = card;
+    }
+  });
+
+  if(targetCard){
+    // Cria a imagem
+    const newImg = document.createElement('img');
+    newImg.src = 'https://i.pinimg.com/1200x/67/8a/88/678a88b1b4cc8d58756ee378d445ac34.jpg';
+    newImg.alt = 'Ilustração decorativa';
+    newImg.style.position = 'absolute';
+    newImg.style.top = '12px';
+    newImg.style.right = '12px';
+    newImg.style.width = '100px'; // ajuste conforme quiser
+    newImg.style.height = 'auto';
+    newImg.style.borderRadius = '12px';
+    newImg.style.zIndex = '2';
+    newImg.style.pointerEvents = 'none';
+    newImg.style.filter = 'drop-shadow(0 8px 20px rgba(11,64,82,0.05))';
+
+    // Garantir que o card tenha position relative
+    targetCard.style.position = 'relative';
+
+    // Adiciona a imagem
+    targetCard.appendChild(newImg);
+  }
+})();
+</script>
+<script>
+// REMOVER imagens decorativas dentro dos boxes
+document.querySelectorAll('.hero-card .hero-deco, .servicos .card img').forEach(img => img.remove());
+
+// GARANTIR que todos os boxes tenham fundo branco
+document.querySelectorAll('.hero-card, .servicos .card, .about .text, .about .info, .contact .left, .contact .right').forEach(box => {
+    box.style.background = '#fff';
+});
+</script>
+
+</body>
+</html>
